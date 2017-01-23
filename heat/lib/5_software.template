@@ -1,0 +1,4 @@
+#!/bin/bash
+apt install htop -y
+echo "Welcome to the mighty $FOO, space traveller" > /etc/motd
+echo "Created from template" > /etc/motd

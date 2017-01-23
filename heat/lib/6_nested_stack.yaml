@@ -1,0 +1,13 @@
+heat_template_version: 2016-04-08
+
+description: >
+  This template creates single server via nested template 5_software.yaml
+
+resources:
+  server:
+    type: 5_software.yaml
+
+outputs:
+  floating_ip:
+    description: Floating IP of server
+    value: { get_attr: [ server ] }

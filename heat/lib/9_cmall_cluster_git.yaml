@@ -1,0 +1,30 @@
+heat_template_version: 2016-04-08
+
+description: >
+  Small cluster of VMs which uses git templates. (dont forget to use environment file)
+
+parameters:
+
+  cluster_size:
+    type: number
+    label: Cluster size
+    description: Number of instances in cluster.
+    default: 2
+
+resources:
+  tiny_cluster:
+    type: Lib::single_vm
+    properties:
+      count: { get_param: cluster_size }
+      resource_def:
+        type: 1_single_vm.yaml
+        properties:
+          network: { get_attr: [ network, private_subnet, network_id ] }
+
+  network:
+    type: Lib::private_network
+
+outputs:
+  instance_name:
+    description: Name of the instance.
+    value: { get_attr: [ tiny_cluster, instance_ip ] }

@@ -1,0 +1,50 @@
+heat_template_version: 2016-04-08 
+
+description: >
+  Hello world HOT template that just defines a single server.
+  Contains just base features to verify base HOT support.
+
+parameters:
+  key_name:
+    type: string
+    description: Name of an existing key pair to use for the server
+    default: key
+    constraints:
+      - custom_constraint: nova.keypair
+  flavor:
+    type: string
+    description: Flavor for the server to be created
+    default: 3
+    constraints:
+      - custom_constraint: nova.flavor
+  image:
+    type: string
+    description: Image ID or image name to use for the server
+    default: 349edb01-1a73-4926-a773-481035cd774e
+    constraints:
+      - custom_constraint: glance.image
+  network:
+    type: string
+    description: Network ID or network name to use for the server
+    default: 77e95474-343f-44a6-aa77-f1a2c49fd77c
+    constraints:
+      - custom_constraint: neutron.network
+
+
+resources:
+  server:
+    type: OS::Nova::Server
+    properties:
+      key_name: { get_param: key_name }
+      image: { get_param: image }
+      flavor: { get_param: flavor }
+      networks: 
+        - network: { get_param: network }
+
+outputs:
+  instance_name:
+    description: Name of the instance.
+    value: { get_attr: [ server, name ] }
+  instance_ip:
+    description: IP address of the instance.
+    value: { get_attr: [ server, first_address ] }
