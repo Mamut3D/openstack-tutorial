@@ -1,0 +1,5 @@
+parameters:
+  key_name: key
+  flavor: m1.large
+  image: ost_cli
+  network: 77e95474-343f-44a6-aa77-f1a2c49fd77c

@@ -13,11 +13,11 @@ parameters:
 
 resources:
   tiny_cluster:
-    type: Lib::single_vm
+    type: OS::Heat::ResourceGroup
     properties:
       count: { get_param: cluster_size }
       resource_def:
-        type: 1_single_vm.yaml
+        type: Lib::single_vm
         properties:
           network: { get_attr: [ network, private_subnet, network_id ] }
 

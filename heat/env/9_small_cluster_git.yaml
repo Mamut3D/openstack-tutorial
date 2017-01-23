@@ -1,0 +1,6 @@
+resource_registry:
+  Lib::single_vm: https://raw.githubusercontent.com/Mamut3D/openstack-tutorial/master/heat/lib/1_single_vm.yaml
+  Lib::private_network: https://raw.githubusercontent.com/Mamut3D/openstack-tutorial/master/heat/lib/2_private_network.yaml
+
+parameters:
+  cluster_size: 3
